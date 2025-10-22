@@ -38,6 +38,15 @@ public class Game {
         return this.cars;
     }
 
+    public String currentLabResult() {
+        StringBuilder sb = new StringBuilder();
+        for (Car car : cars) {
+            sb.append(car.getCurrentPosition());
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
     private void validateLabs(int labs) {
         if (labs > MAX_LABS) {
             throw new IllegalArgumentException();

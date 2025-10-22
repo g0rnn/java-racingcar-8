@@ -11,8 +11,10 @@ public class GameManager {
     }
 
     public void start() {
-        if (game.canStart()) {
+        while (game.canStart()) {
             game.nextLab();
+            String labResult = game.currentLabResult();
+            System.out.println(labResult);
         }
     }
 
