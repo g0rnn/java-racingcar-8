@@ -1,5 +1,7 @@
 package racingcar;
 
+import java.util.List;
+
 public class GameManager {
 
     private final Game game;
@@ -12,5 +14,21 @@ public class GameManager {
         if (game.canStart()) {
             game.nextLab();
         }
+    }
+
+    public List<Car> judgeWinners() {
+        if (game.canStart()) {
+            throw new IllegalArgumentException();
+        }
+        List<Car> cars = game.getCars();
+
+        int maxPosition = cars.stream()
+                .mapToInt(Car::getPosition)
+                .max()
+                .orElseThrow(IllegalArgumentException::new);
+
+        return cars.stream()
+                .filter(it -> it.getPosition() == maxPosition)
+                .toList();
     }
 }
