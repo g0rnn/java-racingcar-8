@@ -1,6 +1,8 @@
 package racingcar;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -27,5 +29,22 @@ class CarTest {
     @ValueSource(strings = {"abcdef", "", "toooooo long name"})
     void 유효하지_않은_이름이_전달되면_예외를_던진다(String name) {
         assertThrows(IllegalArgumentException.class, () -> new Car(name));
+    }
+
+    @Test
+    void 현재_위치_정보를_형식에_맞게_제공한다() {
+        Car car = new Car("gyun");
+
+        car.move(4);
+
+        String currentPosition = car.getCurrentPosition();
+
+        String[] carInfo = assertDoesNotThrow(() -> currentPosition.split(" : "));
+
+        String name = carInfo[0];
+        String position = carInfo[1];
+
+        assertEquals("gyun", name);
+        assertEquals("-", position);
     }
 }

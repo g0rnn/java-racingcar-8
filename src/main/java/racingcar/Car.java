@@ -21,6 +21,10 @@ public class Car {
         }
     }
 
+    public String getCurrentPosition() {
+        return name + " : " + "-".repeat(position);
+    }
+
     private void validateName(String name) {
         if (name == null || name.isBlank()) {
             throw new IllegalArgumentException();
