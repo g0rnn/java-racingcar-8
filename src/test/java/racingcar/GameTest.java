@@ -1,6 +1,8 @@
 package racingcar;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Collections;
 import java.util.List;
@@ -27,5 +29,14 @@ class GameTest {
     void 게임에_참여하는_자동차는_1대_이상이다() {
         List<Car> cars = List.of(new Car("gyun"));
         assertDoesNotThrow(() -> new Game(1, cars));
+    }
+
+    @Test
+    void 랩이_끝나면_랩_수가_갱신된다() {
+        int labs = 1;
+        Game game = new Game(labs, List.of(new Car("gyun")));
+        game.nextLab();
+
+        assertEquals(labs - 1, game.getRemainingLaps());
     }
 }
