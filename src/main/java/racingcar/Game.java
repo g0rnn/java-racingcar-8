@@ -11,7 +11,7 @@ public class Game {
     private final List<Car> cars;
     private int labs;
 
-    Game(int labs, List<Car> cars) {
+    public Game(int labs, List<Car> cars) {
         validateLabs(labs);
         validateCars(cars);
         this.labs = labs;

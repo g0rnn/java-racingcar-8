@@ -6,7 +6,7 @@ public class GameManager {
 
     private final Game game;
 
-    GameManager(Game game) {
+    public GameManager(Game game) {
         this.game = game;
     }
 
