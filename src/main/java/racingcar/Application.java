@@ -19,13 +19,13 @@ public class Application {
         System.out.println("시도할 횟수는 몇 회인가요?");
         String count = Console.readLine();
         int labs = Integer.parseInt(count);
-        Game game = new Game(labs, cars);
-        GameManager gameManager = new GameManager(game);
+        Race race = new Race(labs, cars);
+        RaceManager raceManager = new RaceManager(race);
 
         System.out.println("실행 결과");
-        gameManager.start();
+        raceManager.start();
 
-        List<Car> winners = gameManager.judgeWinners();
+        List<Car> winners = raceManager.judgeWinners();
         String winnerNames = winners.stream()
                 .map(Car::getName)
                 .collect(Collectors.joining(", "));

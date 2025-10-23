@@ -11,34 +11,34 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class GameTest {
+class RaceTest {
 
     @ParameterizedTest
     @ValueSource(ints = {100_001, Integer.MAX_VALUE})
     void 최대_랩_수를_넘으면_예외를_던진다(int labs) {
         List<Car> cars = List.of(new Car("gyun"));
-        assertThrows(IllegalArgumentException.class, () -> new Game(labs, cars));
+        assertThrows(IllegalArgumentException.class, () -> new Race(labs, cars));
     }
 
     @Test
     void 게임에_참여하는_자동차는_1대보다_작으면_예외를_던진다() {
         List<Car> cars = Collections.emptyList();
-        assertThrows(IllegalArgumentException.class, () -> new Game(1, cars));
+        assertThrows(IllegalArgumentException.class, () -> new Race(1, cars));
     }
 
     @Test
     void 게임에_참여하는_자동차는_1대_이상이다() {
         List<Car> cars = List.of(new Car("gyun"));
-        assertDoesNotThrow(() -> new Game(1, cars));
+        assertDoesNotThrow(() -> new Race(1, cars));
     }
 
     @Test
     void 랩이_끝나면_랩_수가_갱신된다() {
         int labs = 1;
-        Game game = new Game(labs, List.of(new Car("gyun")));
-        game.nextLab();
+        Race race = new Race(labs, List.of(new Car("gyun")));
+        race.nextLab();
 
-        assertEquals(labs - 1, game.getRemainingLaps());
+        assertEquals(labs - 1, race.getRemainingLaps());
     }
 
     @Test
@@ -47,10 +47,10 @@ class GameTest {
         Car car1 = new Car("gyun");
         Car car2 = new Car("ho");
         List<Car> cars = List.of(car1, car2);
-        Game game = new Game(labs, cars);
+        Race race = new Race(labs, cars);
 
         assertRandomNumberInRangeTest(() -> {
-            game.nextLab();
+            race.nextLab();
             assertEquals(1, car1.getPosition());
             assertEquals(1, car2.getPosition());
         }, 4);

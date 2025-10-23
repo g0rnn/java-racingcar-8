@@ -2,27 +2,27 @@ package racingcar;
 
 import java.util.List;
 
-public class GameManager {
+public class RaceManager {
 
-    private final Game game;
+    private final Race race;
 
-    public GameManager(Game game) {
-        this.game = game;
+    public RaceManager(Race race) {
+        this.race = race;
     }
 
     public void start() {
-        while (game.canStart()) {
-            game.nextLab();
-            String labResult = game.currentLabResult();
+        while (race.canStart()) {
+            race.nextLab();
+            String labResult = race.currentLabResult();
             System.out.println(labResult);
         }
     }
 
     public List<Car> judgeWinners() {
-        if (game.canStart()) {
+        if (race.canStart()) {
             throw new IllegalArgumentException();
         }
-        List<Car> cars = game.getCars();
+        List<Car> cars = race.getCars();
 
         int maxPosition = cars.stream()
                 .mapToInt(Car::getPosition)

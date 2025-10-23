@@ -3,7 +3,7 @@ package racingcar;
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.List;
 
-public class Game {
+public class Race {
 
     private static final int MAX_LABS = 100_000;
     private static final int MAX_CARS_SIZE = 100_000;
@@ -11,7 +11,7 @@ public class Game {
     private final List<Car> cars;
     private int labs;
 
-    public Game(int labs, List<Car> cars) {
+    public Race(int labs, List<Car> cars) {
         validateLabs(labs);
         validateCars(cars);
         this.labs = labs;
