@@ -28,14 +28,24 @@ public class RaceManager {
             throw new IllegalArgumentException();
         }
         List<Car> cars = race.getCars();
+        return filterMaxPosition(cars);
+    }
 
-        int maxPosition = cars.stream()
-                .mapToInt(Car::getPosition)
-                .max()
-                .orElseThrow(IllegalArgumentException::new);
+    private List<Car> filterMaxPosition(List<Car> cars) {
+        List<Car> winners = new ArrayList<>();
+        int max = -1;
 
-        return cars.stream()
-                .filter(it -> it.getPosition() == maxPosition)
-                .toList();
+        for (Car car : cars) {
+            int p = car.getPosition();
+            if (max < p) {
+                max = p;
+                winners.clear();
+                winners.add(car);
+            } else if (max == p) {
+                winners.add(car);
+            }
+        }
+
+        return winners;
     }
 }
