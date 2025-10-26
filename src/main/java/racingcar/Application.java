@@ -9,6 +9,12 @@ public class Application {
     public static void main(String[] args) {
         System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
         String names = Console.readLine();
+        if (names == null || names.isBlank()) {
+            throw new IllegalArgumentException();
+        }
+        if (!names.matches("[a-zA-Z가-힣]+[0-9]*(,[a-zA-Z가-힣]+[0-9]*)*")) {
+            throw new IllegalArgumentException();
+        }
         String[] carNames = names.split(",");
 
         List<Car> cars = new ArrayList<>();
