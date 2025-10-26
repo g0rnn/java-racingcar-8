@@ -32,7 +32,8 @@ public class Application {
         RaceManager raceManager = new RaceManager(race);
 
         System.out.println("실행 결과");
-        raceManager.start();
+        String results = raceManager.start();
+        System.out.println(results);
 
         List<Car> winners = raceManager.judgeWinners();
         String winnerNames = winners.stream()

@@ -44,7 +44,7 @@ class ApplicationTest extends NsTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"1", "10"})
+    @ValueSource(strings = {"1", "10", "10000"})
     void 시도횟수_입력(String input) {
         assertSimpleTest(() ->
                 assertDoesNotThrow(() -> runException("pobi,woni", input))
