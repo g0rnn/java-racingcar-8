@@ -4,6 +4,7 @@ import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberI
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
@@ -38,6 +39,23 @@ class ApplicationTest extends NsTest {
     void 자동차_이름_입력_예외(String input) {
         assertSimpleTest(() ->
                 assertThatThrownBy(() -> runException(input))
+                        .isInstanceOf(IllegalArgumentException.class)
+        );
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1", "10"})
+    void 시도횟수_입력(String input) {
+        assertSimpleTest(() ->
+                assertDoesNotThrow(() -> runException("pobi,woni", input))
+        );
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"-1", "0", "a", "1a", "0.1"})
+    void 시도횟수_입력_예외(String input) {
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("pobi,woni", input))
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }

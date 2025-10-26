@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Race {
 
+    private static final int MIN_LABS = 1;
     private static final int MAX_LABS = 100_000;
     private static final int MAX_CARS_SIZE = 100_000;
 
@@ -48,7 +49,7 @@ public class Race {
     }
 
     private void validateLabs(int labs) {
-        if (labs > MAX_LABS) {
+        if (labs < MIN_LABS || labs > MAX_LABS) {
             throw new IllegalArgumentException();
         }
     }
