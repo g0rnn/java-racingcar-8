@@ -1,10 +1,5 @@
 package racingcar;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 public class Application {
     public static void main(String[] args) {
         try {
@@ -13,21 +8,15 @@ public class Application {
             String names = view.readNames();
             String[] carNames = names.split(",");
 
-            Set<Car> cars = Arrays.stream(carNames)
-                    .map(Car::new)
-                    .collect(Collectors.toUnmodifiableSet());
-
             int labs = view.readTryCount();
-            Race race = new Race(labs, cars);
+            Race race = new Race(labs, Cars.of(carNames));
             RaceManager raceManager = new RaceManager(race);
 
             String results = raceManager.start();
             view.writeResults(results);
 
-            List<Car> winners = raceManager.judgeWinners();
-            String winnerNames = winners.stream()
-                    .map(Car::getName)
-                    .collect(Collectors.joining(", "));
+            Cars winners = raceManager.judgeWinners();
+            String winnerNames = winners.getNames();
             view.writeWinners(winnerNames);
         } finally {
             ConsoleView.release();

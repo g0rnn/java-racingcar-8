@@ -1,18 +1,14 @@
 package racingcar;
 
-import camp.nextstep.edu.missionutils.Randoms;
-import java.util.Set;
-
 public class Race {
 
     private static final int MIN_LABS = 1;
     private static final int MAX_LABS = 100_000;
-    private static final int MAX_CARS_SIZE = 100_000;
 
-    private final Set<Car> cars;
+    private final Cars cars;
     private int labs;
 
-    public Race(int labs, Set<Car> cars) {
+    public Race(int labs, Cars cars) {
         validateLabs(labs);
         validateCars(cars);
         this.labs = labs;
@@ -24,10 +20,7 @@ public class Race {
     }
 
     public void nextLab() {
-        for (Car car : cars) {
-            int condition = Randoms.pickNumberInRange(0, 9);
-            car.move(condition);
-        }
+        this.cars.sprint();
         this.labs -= 1;
     }
 
@@ -35,17 +28,12 @@ public class Race {
         return this.labs;
     }
 
-    public Set<Car> getCars() {
+    public Cars getCars() {
         return this.cars;
     }
 
     public String currentLabResult() {
-        StringBuilder sb = new StringBuilder();
-        for (Car car : cars) {
-            sb.append(car.getCurrentPosition());
-            sb.append("\n");
-        }
-        return sb.toString();
+        return cars.getCurrentStatus();
     }
 
     private void validateLabs(int labs) {
@@ -54,12 +42,11 @@ public class Race {
         }
     }
 
-    private void validateCars(Set<Car> cars) {
+    private void validateCars(Cars cars) {
         if (cars == null) {
             throw new IllegalArgumentException();
         }
-
-        if (cars.isEmpty() || cars.size() > MAX_CARS_SIZE) {
+        if (!cars.isAvailableSize()) {
             throw new IllegalArgumentException();
         }
     }
