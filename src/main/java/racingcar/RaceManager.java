@@ -1,6 +1,5 @@
 package racingcar;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RaceManager {
@@ -12,15 +11,11 @@ public class RaceManager {
     }
 
     public String start() {
-        List<String> results = new ArrayList<>();
-
         while (race.canStart()) {
             race.nextLab();
-            String labResult = race.currentLabResult();
-            results.add(labResult);
         }
-
-        return String.join("\n", results);
+        List<String> labResults = race.getLabResults();
+        return String.join("\n", labResults);
     }
 
     public Cars judgeWinners() {

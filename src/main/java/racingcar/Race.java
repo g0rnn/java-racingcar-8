@@ -1,11 +1,15 @@
 package racingcar;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Race {
 
     private static final int MIN_LABS = 1;
     private static final int MAX_LABS = 100_000;
 
     private final Cars cars;
+    private final List<String> labResults = new ArrayList<>();
     private int labs;
 
     public Race(int labs, Cars cars) {
@@ -22,6 +26,7 @@ public class Race {
     public void nextLab() {
         this.cars.sprint();
         this.labs -= 1;
+        labResults.add(cars.getCurrentStatus());
     }
 
     public int getRemainingLaps() {
@@ -32,8 +37,8 @@ public class Race {
         return this.cars;
     }
 
-    public String currentLabResult() {
-        return cars.getCurrentStatus();
+    public List<String> getLabResults() {
+        return this.labResults;
     }
 
     private void validateLabs(int labs) {
