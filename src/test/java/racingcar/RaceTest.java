@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -16,26 +16,26 @@ class RaceTest {
     @ParameterizedTest
     @ValueSource(ints = {100_001, Integer.MAX_VALUE})
     void 최대_랩_수를_넘으면_예외를_던진다(int labs) {
-        List<Car> cars = List.of(new Car("gyun"));
+        Set<Car> cars = Set.of(new Car("gyun"));
         assertThrows(IllegalArgumentException.class, () -> new Race(labs, cars));
     }
 
     @Test
     void 게임에_참여하는_자동차는_1대보다_작으면_예외를_던진다() {
-        List<Car> cars = Collections.emptyList();
+        Set<Car> cars = Collections.emptySet();
         assertThrows(IllegalArgumentException.class, () -> new Race(1, cars));
     }
 
     @Test
     void 게임에_참여하는_자동차는_1대_이상이다() {
-        List<Car> cars = List.of(new Car("gyun"));
+        Set<Car> cars = Set.of(new Car("gyun"));
         assertDoesNotThrow(() -> new Race(1, cars));
     }
 
     @Test
     void 랩이_끝나면_랩_수가_갱신된다() {
         int labs = 1;
-        Race race = new Race(labs, List.of(new Car("gyun")));
+        Race race = new Race(labs, Set.of(new Car("gyun")));
         race.nextLab();
 
         assertEquals(labs - 1, race.getRemainingLaps());
@@ -46,7 +46,7 @@ class RaceTest {
         int labs = 10;
         Car car1 = new Car("gyun");
         Car car2 = new Car("ho");
-        List<Car> cars = List.of(car1, car2);
+        Set<Car> cars = Set.of(car1, car2);
         Race race = new Race(labs, cars);
 
         assertRandomNumberInRangeTest(() -> {

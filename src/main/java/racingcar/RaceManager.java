@@ -2,6 +2,7 @@ package racingcar;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class RaceManager {
 
@@ -27,11 +28,11 @@ public class RaceManager {
         if (race.canStart()) {
             throw new IllegalArgumentException();
         }
-        List<Car> cars = race.getCars();
+        Set<Car> cars = race.getCars();
         return filterMaxPosition(cars);
     }
 
-    private List<Car> filterMaxPosition(List<Car> cars) {
+    private List<Car> filterMaxPosition(Set<Car> cars) {
         List<Car> winners = new ArrayList<>();
         int max = -1;
 

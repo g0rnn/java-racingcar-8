@@ -1,7 +1,7 @@
 package racingcar;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import java.util.List;
+import java.util.Set;
 
 public class Race {
 
@@ -9,10 +9,10 @@ public class Race {
     private static final int MAX_LABS = 100_000;
     private static final int MAX_CARS_SIZE = 100_000;
 
-    private final List<Car> cars;
+    private final Set<Car> cars;
     private int labs;
 
-    public Race(int labs, List<Car> cars) {
+    public Race(int labs, Set<Car> cars) {
         validateLabs(labs);
         validateCars(cars);
         this.labs = labs;
@@ -35,7 +35,7 @@ public class Race {
         return this.labs;
     }
 
-    public List<Car> getCars() {
+    public Set<Car> getCars() {
         return this.cars;
     }
 
@@ -54,7 +54,7 @@ public class Race {
         }
     }
 
-    private void validateCars(List<Car> cars) {
+    private void validateCars(Set<Car> cars) {
         if (cars == null) {
             throw new IllegalArgumentException();
         }

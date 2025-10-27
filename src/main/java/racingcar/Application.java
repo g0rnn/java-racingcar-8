@@ -2,6 +2,7 @@ package racingcar;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Application {
@@ -12,9 +13,9 @@ public class Application {
             String names = view.readNames();
             String[] carNames = names.split(",");
 
-            List<Car> cars = Arrays.stream(carNames)
+            Set<Car> cars = Arrays.stream(carNames)
                     .map(Car::new)
-                    .toList();
+                    .collect(Collectors.toUnmodifiableSet());
 
             int labs = view.readTryCount();
             Race race = new Race(labs, cars);
